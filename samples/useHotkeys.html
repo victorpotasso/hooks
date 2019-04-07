@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>useHotkeys</title>
+</head>
+<body>
+  <h1>useHotkeys</h1>
+  <div class="output"></div>
+
+  <script type="module">
+    import { useHotkeys } from '../lib/index.js';
+
+    const output = value => document.querySelector('.output').innerHTML = value.join('+');
+
+    useHotkeys({ keys: ['x'] }, output);
+    useHotkeys({ keys: ['a', 's', 'd', 'w'], target: window }, output);
+    useHotkeys({ keys: ['ctrlKey+a', 'shiftKey+A', 'metaKey+a', 'altKey+a'], when: 'up' }, output);
+  </script>
+</body>
+</html>

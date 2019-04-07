@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>useState</title>
+</head>
+<body>
+  <h1>useState</h1>
+  <vp-name></vp-name>
+  <hr>
+  <vp-family></vp-family>
+
+  <script type="module">
+    import { useState } from '../lib/index.js';
+
+    // Name
+    class Name extends HTMLElement {
+      constructor() {
+        super();
+        this.update = this.update.bind(this);
+      }
+
+      connectedCallback() {
+        const [getName, setName, onName] = useState('Victor');
+        onName(this.update);
+        this.update(getName());
+        this.addEventListener('click', () => setName(`Victor => ${Math.random()}`));
+      }
+
+      update(data) {
+        this.textContent = data;
+      }
+    }
+    customElements.define('vp-name', Name);
+
+    // Family
+    class Family extends HTMLElement {
+      constructor() {
+        super();
+        this.update = this.update.bind(this);
+      }
+
+      connectedCallback() {
+        const [getFamily, setFamily, onFamily] = useState({ name: 'Potasso', origin: 'Italy' });
+        onFamily(this.update);
+        this.update(getFamily());
+        this.addEventListener('click', () => setFamily({ origin: 'Brazil' }));
+      }
+
+      update(data) {
+        this.textContent = `${data.name} is from ${data.origin}`;
+      }
+    }
+    customElements.define('vp-family', Family);
+  </script>
+</body>
+</html>

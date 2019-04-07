@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>useCarousel</title>
+</head>
+<body>
+  <h1>useCarousel</h1>
+  <div class="Carousel">
+    <ul>
+      <li>0</li>
+      <li>1</li>
+      <li>3</li>
+    </ul>
+    <button data-action="previous">Previous</button>
+    <button data-action="next">Next</button>
+  </div>
+
+  <script type="module">
+    import { useArrayNavigation } from '../lib/index.js';
+
+    function Carousel(el) {
+      const list = el.querySelector('ul');
+      const items = Array.from(list.querySelectorAll('li'));
+      const nextBtn = el.querySelector('[data-action="next"]');
+      const previousBtn = el.querySelector('[data-action="previous"]');
+      const { getIndex, onChangeIndex, next, previous } = useArrayNavigation({ array: items, infinity: true, autoPlay: false });
+
+      nextBtn.addEventListener('click', next);
+      previousBtn.addEventListener('click', previous);
+
+      items.forEach((item, i) => item.style.display = i == getIndex() ? 'block' : 'none');
+      onChangeIndex((index) => {
+        items.forEach((item, i) => item.style.display = i == index ? 'block' : 'none');
+      });
+    }
+    new Carousel(document.querySelector('.Carousel'))
+  </script>
+</body>
+</html>

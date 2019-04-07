@@ -1,0 +1,14 @@
+{
+  "name": "@victorpotasso/hooks",
+  "version": "0.0.1",
+  "description": "Collection of vanilla hooks",
+  "author": "victorpotasso",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorpotasso/hooks.git"
+  },
+  "license": "MIT",
+  "directories": {
+    "lib": "lib"
+  }
+}
