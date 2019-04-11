@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event</title>
+</head>
+<body>
+  <h1>Event</h1>
+  <div class="output"></div>
+
+  <script type="module">
+    import { listenEvent, triggerEvent } from '../lib/index.js';
+
+    const output = value => document.querySelector('.output').innerHTML = value;
+
+    listenEvent('UPDATE_TEXT', event => output(event.data.text))
+    triggerEvent('UPDATE_TEXT', { text: 'Lorem Ipsum' });
+  </script>
+</body>
+</html>
